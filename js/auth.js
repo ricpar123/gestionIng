@@ -18,27 +18,9 @@ function validar(e) {
            nombreUsuario = nombre.value;
            claveUsuario = (clave.value).toString();
 
-          if(localStorage.getItem('nombre')){
-              let user = localStorage.getItem('nombre');
-              let pwd = localStorage.getItem('clave');
-              console.log('datos localStorage:', user, pwd);
-          
-          
-           if(user == nombreUsuario && pwd == claveUsuario) {
-            if(localStorage.getItem('rol') == 'admin'){
-                window.open('../vistas/menu.html');
-            }else{
-                window.open('../vistas/cambioScreen.html');
-            }
+        }
 
-           }else{
-            alert('Clave o nombre incorrectos');
-            return;
-           }
-           
-        }else{
-
-            let _body = {userid: nombreUsuario, clave: claveUsuario};
+           let _body = {userid: nombreUsuario, clave: claveUsuario};
            console.log('body ', _body);
 
            fetch('https://servering-production.up.railway.app/usuarios/log', {
@@ -59,9 +41,6 @@ function validar(e) {
                     rolUsuario = data.usuario.rol;
                     console.log('Rol: ', rolUsuario);
 
-                    localStorage.setItem('nombre', nombreUsuario);
-                    localStorage.setItem('clave', claveUsuario);
-                    localStorage.setItem('rol', rolUsuario);
 
 
                     if(rolUsuario == 'admin'){
@@ -97,11 +76,11 @@ function validar(e) {
             
             
             
-    }
+    
 
        
 
-}
+
 
         
     

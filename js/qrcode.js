@@ -1,22 +1,26 @@
-const scanner = new Html5QrcodeScanner('reader', {
-    qrbox: {
-        width: 250,
-        heigth: 250,
-    },
-    fps: 20,
+// script.js file
+
+function domReady(fn) {
+    if (
+        document.readyState === "complete" ||
+        document.readyState === "interactive"
+    ) {
+        setTimeout(fn, 1000);
+    } else {
+        document.addEventListener("DOMContentLoaded", fn);
+    }
+}
+
+domReady(function () {
+
+    // If found you qr code
+    function onScanSuccess(decodeText, decodeResult) {
+        alert("You Qr is : " + decodeText, decodeResult);
+    }
+
+    let htmlscanner = new Html5QrcodeScanner(
+        "my-qr-reader",
+        { fps: 10, qrbos: 250 }
+    );
+    htmlscanner.render(onScanSuccess);
 });
-scanner.render(success, error);
-
-function success(result){
-    document.getElementById('result').innerHTML = `
-    <h2>Success!</h2>
-    <p>${result}</p>`;
-
-    scanner.clear();
-    document.getElementById('reader').remove();
-    
-}
-
-function error(err){
-    console.error(err);
-}
