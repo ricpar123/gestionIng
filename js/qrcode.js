@@ -12,9 +12,12 @@ function domReady(fn) {
 }
 
 domReady(function () {
+    let result = [];
 
     // If found you qr code
     function onScanSuccess(decodeText, decodeResult) {
+        result = + decodeText + decodeResult;
+        console.log('resultado:', result);
         alert("You Qr is : " + decodeText, decodeResult);
     }
 
